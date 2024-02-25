@@ -11,10 +11,18 @@
  */
 
 
-/* Create an empty queue */
+/**
+ * q_new - Create an empty queue
+ */
 struct list_head *q_new()
 {
-    return NULL;
+    struct list_head *q = malloc(sizeof(*q));
+
+    if (!q)  // If allocate failed
+        return NULL;
+
+    INIT_LIST_HEAD(q);
+    return q;
 }
 
 /* Free all storage used by queue */
