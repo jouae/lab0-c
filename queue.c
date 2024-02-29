@@ -42,15 +42,86 @@ void q_free(struct list_head *head)
     free(head);
 }
 
-/* Insert an element at head of queue */
+/**
+ * q_insert_head - Insert an element at head of queue
+ * @head: list_head struct to be insterted
+ * @s: the string to be inserted
+ */
 bool q_insert_head(struct list_head *head, char *s)
 {
+    element_t *new_node;
+    size_t str_len;
+
+    if (!s || !*s)
+        return false;
+
+    if (!head)  // If head is a null pointer
+        return false;
+
+    // allocate memory of new node
+    new_node = malloc(sizeof(element_t));
+
+    if (!new_node)  // If allocation failed
+        return false;
+
+    INIT_LIST_HEAD(&new_node->list);
+
+    // +1 for null-terminator '\0'
+    str_len = strlen(s) + 1;
+
+    new_node->value = malloc(str_len * sizeof(char));
+
+    // If allocation failed
+    if (!new_node->value) {
+        free(new_node);
+        return false;
+    }
+
+    memcpy(new_node->value, s, str_len);
+
+    list_add(&new_node->list, head);
+
     return true;
 }
 
-/* Insert an element at tail of queue */
+/**
+ * q_insert_head - Insert an element at tail of queue
+ * @head: list_head struct to be insterted
+ * @s: the string to be inserted
+ */
 bool q_insert_tail(struct list_head *head, char *s)
 {
+    element_t *new_node;
+    size_t str_len;
+
+    if (!s || !*s)
+        return false;
+
+    if (!head)  // If head is a null pointer
+        return false;
+
+    // allocate memory of new node
+    new_node = malloc(sizeof(element_t));
+
+    if (!new_node)  // If allocation failed
+        return false;
+
+    INIT_LIST_HEAD(&new_node->list);
+
+    // +1 for null-terminator '\0'
+    str_len = strlen(s) + 1;
+
+    new_node->value = malloc(str_len * sizeof(char));
+
+    // If allocation failed
+    if (!new_node->value) {
+        free(new_node);
+        return false;
+    }
+
+    memcpy(new_node->value, s, str_len);
+
+    list_add_tail(&new_node->list, head);
     return true;
 }
 
