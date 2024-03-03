@@ -209,7 +209,7 @@ bool q_delete_dup(struct list_head *head)
         cutter_head = next->list.prev;
     }
 
-    list_for_each_entry_safe (current, safe, &dup_head, list)
+    list_for_each_entry_safe (current, next, &dup_head, list)
         q_release_element(current);
 
     return true;
